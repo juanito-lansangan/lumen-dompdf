@@ -1,2 +1,2 @@
 # Lumen PHP Framework
-Sample code with DOM PDF, file upload with cors config
+Sample code with DOM PDF and file upload with cors config
