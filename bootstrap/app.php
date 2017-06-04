@@ -25,8 +25,9 @@ $app = new Laravel\Lumen\Application(
 
 
 
-// $app->withFacades();
+$app->withFacades();
 
+$app->configure('cors');
 // $app->withEloquent();
 
 /*
@@ -50,6 +51,9 @@ $app->singleton(
     App\Console\Kernel::class
 );
 
+$app->singleton('filesystem', function ($app) {
+    return $app->loadComponent('filesystems', 'Illuminate\Filesystem\FilesystemServiceProvider', 'filesystem');
+});
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -65,9 +69,10 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    // 'auth' => App\Http\Middleware\Authenticate::class,
+    'cors' => \Barryvdh\Cors\HandleCors::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -86,7 +91,7 @@ $app->singleton(
 
 // load DOMPDF 
 $app->register(Barryvdh\DomPDF\ServiceProvider::class);
-
+$app->register(Barryvdh\Cors\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

@@ -20,5 +20,6 @@ $app->get('/', function () use ($app) {
 //     return str_random(32);
 // });
 
-$app->get('/pdf-demo', 'ReportController@loadPdf');
-$app->get('/test', 'ReportController@test');
+$app->get('pdf-demo', 'ReportController@loadPdf');
+$app->get('test', 'ReportController@test');
+$app->post('upload', 'FileController@saveFile');
